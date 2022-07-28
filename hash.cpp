@@ -136,6 +136,26 @@ void DoubleHashing(int arr[],int s_arr,int Hash[]){
     }
 }
 
+int searchLinearProbing(int value, int Hash[], int h_size){ // Return the index of value in Hash table, return -1 if doesn't exist
+    int t=h(value);
+    for(int j=0;j<h_size;++j){
+        if(Hash[t]==value) return t;
+        else t=h(t+1);
+    }
+    return -1;
+}
+
+int searchQuadraticProbing(int value, int Hash[], int h_size){ // Return the index of value in Hash table, return -1 if doesn't exist
+    int t=h(value);
+    for(int j=0;j<h_size;++j){
+        if(Hash[t]==value) return t;
+        else for(int k=0;k<h_size;++k){
+            t=h(t+k*k);
+            if(Hash[t]==value) return t;
+        }
+    }
+}
+
 // UTILIZING FUNCTIONS
 void printTable(int Hash[], int size){
     for(int i=0;i<size;++i) cout << Hash[i] << " "; 
@@ -155,10 +175,12 @@ int main(){
     cout << "Linear Probing:\n";
     LinearProbing(arr,n,Hash);
     printTable(Hash,m);
+    cout << "Index of 73 in Hash table (Linear Probing): " << searchLinearProbing(73,Hash,m) << endl;
     reset(Hash,m); // Reset before hashing in other ways.
     cout << "Quadratic Probing:\n";
     QuadraticProbing(arr,n,Hash);
     printTable(Hash,m);
+    cout << "Index of 73 in Hash table (Quadratic Probing): " << searchQuadraticProbing(73,Hash,m) << endl;
     reset(Hash,m); // Reset before hashing in other ways.
     cout << "For double hashing, we need to declare 2 integers dh_a and dh_b which will exist in "<< 
             "the hash functions h1 and h2.\ndh_a="; cin>>dh_a;
