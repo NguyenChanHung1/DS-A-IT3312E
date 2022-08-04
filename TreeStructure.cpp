@@ -30,7 +30,7 @@ void InOrder(treenode *root) {
 }
 
 int height(treenode* root) {
-    if(root==NULL) return -1;
+    if(root==NULL) return 0;
     int h1=1+height(root->left);
     int h2=1+height(root->right);
     return (h1>h2?h1:h2);
@@ -107,7 +107,7 @@ int countNodes(treenode* root){
 }
 
 int depth(treenode* root){
-    if(root==NULL) return -1;
+    if(root==NULL) return 0;
     return (1+depth(root->left))||(1+depth(root->right));
 }
 
